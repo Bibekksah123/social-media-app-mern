@@ -6,11 +6,10 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    userid: {
+    userid: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: "userSchema",
-      required: true,
-    },
+    }],
     likes: [
       {
         type: mongoose.Schema.Types.ObjectId,
