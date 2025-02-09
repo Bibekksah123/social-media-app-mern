@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import logo from "../assets/logo.png";
+
 
 function Login() {
   const [islogin, setislogin] = useState(true);
@@ -8,7 +10,7 @@ function Login() {
         <div>
           <img
             className="w-[250px]"
-            src="https://static.vecteezy.com/system/resources/previews/000/623/220/original/love-heart-logo-and-symbol-vector.jpg"
+            src={logo}
             alt=""
           />
           <h1 className="text-center font-semibold ">VibeNest</h1>

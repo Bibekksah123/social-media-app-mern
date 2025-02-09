@@ -49,13 +49,13 @@ export const likeOrDislike = async (req, res) => {
       //dislikes
       await postModels.findByIdAndUpdate(postId,{ $pull: { likes: loginUseerId } });
       return res.status(201).json({
-        message: "You disliked userpost post",
+        message: "You disliked userpost",
       });
     } else {
       //likes
       await postModels.findByIdAndUpdate(postId,{ $push: { likes: loginUseerId } });
        return res.status(201).json({
-         message: "You liked userpost post",
+         message: "You liked userpost",
        });
     }
   } catch (error) {

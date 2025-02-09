@@ -1,5 +1,6 @@
 import React from "react";
 import Setting from "./Setting";
+import logo from '../assets/logo.png'
 function Leftsidebar() {
   return (
     <div>
@@ -7,7 +8,7 @@ function Leftsidebar() {
         <div className="flex items-center mt-1">
           <img
             className="w-20"
-            src="https://static.vecteezy.com/system/resources/previews/000/623/220/original/love-heart-logo-and-symbol-vector.jpg"
+            src={logo}
             alt=""
           />
           <h1>VibeNest</h1>

@@ -20,14 +20,21 @@ const userSchema = mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "userSchema",
-        default:[]
+        default: [],
       },
     ],
     followings: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "userSchema",
-        default:[]
+        default: [],
+      },
+    ],
+    bookmarks: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "userSchema",
+        default: [],
       },
     ],
   },
