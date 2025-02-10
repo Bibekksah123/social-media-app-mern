@@ -1,6 +1,7 @@
 import express from 'express'
-import {  bookmarks, followerOrFollowing, getProfile, login_user, logout_user, otherProfile, Register_user } from '../controllers/userController.js'
+import {login_user, logout_user, Register_user } from '../controllers/userController.js'
 import { isAuthincated } from '../middleware/Auth.js';
+import { bookmarks, followerOrFollowing, getProfile, otherProfile } from '../controllers/userDetails.js';
 
 export const userRouter=express.Router()
 

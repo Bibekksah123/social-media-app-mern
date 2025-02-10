@@ -3,7 +3,7 @@ import { CiSearch } from "react-icons/ci";
 import Profilesee from "./Profilesee";
 function Rightsidebar() {
   return (
-    <div className=" p-5 rounded-3xl">
+    <div className=" p-5 rounded-3xl hidden md:block">
       <div className="flex items-center px-4 py-2 rounded-full bg-gray-200 outline-none">
         <CiSearch className="mr-1" size={"20"} />
         <input

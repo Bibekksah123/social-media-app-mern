@@ -15,7 +15,7 @@ function Profilesee() {
         <p className="text-sm">@arav123</p>
       </div>
       <button className="bg-gray-600 px-10 py-1 rounded-full text-white flex items-center ml-4 my-3 cursor-pointer">
-        Profile
+        Follow
       </button>
     </div>
   );
