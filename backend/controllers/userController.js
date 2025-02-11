@@ -38,46 +38,70 @@ export const login_user = async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(401).json({
-        message: "All fiels are empty",
+        message: "All fields are empty",
         success: false,
       });
     }
+
     const user = await userModels.findOne({ email });
     if (!user) {
       return res.status(401).json({
-        message: " user not exits",
+        message: "user not exists",
         success: false,
       });
     }
+
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({
-        message: " incorrect email and password ",
+        message: "incorrect email and password",
         success: false,
       });
     }
+
     const token = await jwt.sign(
       { userid: user.id },
       process.env.secrect_code,
       { expiresIn: "7d" }
     );
+
+    const cookieOptions = {
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), 
+      secure: process.env.NODE_ENV === 'production', 
+      sameSite: 'lax',
+      path: '/',
+    };
+
+    console.log(token)
+
     return res
       .status(201)
-      .cookie("token", token, { expiresIn: "7d", httpOnly: true })
+      .cookie("token", token, cookieOptions)
       .json({
-        message: `welcome to our app ${user.username}.`,
+        message: `welcome to our app ${user.username}`,
         success: true,
         user,
       });
-  } catch (eror) {
-    console.log(eror);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Internal server error",
+      success: false,
+    });
   }
 };
 
 export const logout_user = (req, res) => {
+  const cookieOptions = {
+    expires: new Date(Date.now()),
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
+  };
+
   return res
-    .status(201)
-    .cookie("token", "", { expiresIn: new Date(Date.now()) })
+    .status(200)
+    .cookie("token", "", cookieOptions)
     .json({
       message: "logout successfully",
       success: true,
