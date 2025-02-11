@@ -1,7 +1,8 @@
 import React from "react";
-
 import Userprofile_top from "./Userprofile_top";
+
 function UserProfile() {
+ 
   return (
     <div>
       <div>

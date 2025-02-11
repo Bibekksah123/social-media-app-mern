@@ -2,7 +2,16 @@ import React from 'react'
 import { IoArrowBack } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import Avatar from "react-avatar";
+import { useSelector } from "react-redux";
+import useUserProfile from '../hooks/userProfile';
+import useFetchData from '../hooks/useFetchData';
+
 function Userprofile_top() {
+    const { User } = useSelector((state) => state.userdata);
+  const id=User?._id
+  const url = `http://localhost:8080/user/v1/api/getprofile/${id}`;
+const {data}=useFetchData(url)
+console.log(data)
   return (
     <div>
               <div className="flex">

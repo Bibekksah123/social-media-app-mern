@@ -4,6 +4,8 @@ import axios from "axios";
 import { userPort } from "../utilites/Detailport";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { getUser } from "../redux/userSlice";
 
 function Login() {
   const [islogin, setislogin] = useState(true);
@@ -11,41 +13,59 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const logindata = async () => {
+    try {
+      const logindata = await axios.post(`${userPort}/login_user/socialmedia`, {
+        email,
+        password,
+      });
+
+      if (logindata.data.success) {
+        dispatch(getUser(logindata?.data?.user));
+        toast(logindata.data.message);
+        navigate("/");
+      } else {
+        toast(logindata.data.message);
+      }
+    } catch (error) {
+      if (error.response) {
+        toast(error.response.data.message);
+      } else {
+        toast("An unexpected error occurred. Please try again.");
+      }
+    }
+  };
+
+  const singupdata = async () => {
+    try {
+      const singupdata = await axios.post(`${userPort}/Register/socialmedia`, {
+        username,
+        email,
+        password,
+      });
+      if (singupdata.data.success) {
+        setislogin(true);
+        toast(singupdata.data.message);
+      } else {
+        toast(singupdata.response.data.message);
+      }
+    } catch (error) {
+      if (error.response) {
+        toast(error.response.data.message);
+      } else {
+        toast("An unexpected error occurred. Please try again.");
+      }
+    }
+  };
+
   const submitHandlers = async (e) => {
     e.preventDefault();
     if (islogin) {
-      try {
-        const logindata = await axios.post(
-          `${userPort}/login_user/socialmedia`,
-          {
-            email,
-            password,
-          }
-        );
-        if (logindata.data.success) {
-          toast(logindata.data.message);
-          navigate("/");
-        } else {
-          toast(logindata.data.message);
-        }
-      } catch (error) {
-       toast(error.message);
-      }
+      logindata();
     } else {
-      try {
-        const singupdata = await axios.post(
-          `${userPort}/Register/socialmedia`,
-          { username, email, password }
-        );
-        if (singupdata.data.success) {
-          setislogin(true);
-          toast(singupdata.data.message);
-        } else {
-          toast(singupdata.data.message);
-        }
-      } catch (error) {
-        toast(error.message);
-      }
+      singupdata();
     }
   };
   return (

@@ -1,5 +1,6 @@
 import React from 'react'
 import Avatar from 'react-avatar';
+
 function Profilesee() {
   return (
     <div className="flex mt-4 items-center">
