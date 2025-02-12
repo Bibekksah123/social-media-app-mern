@@ -17,9 +17,11 @@ function Login() {
 
   const logindata = async () => {
     try {
-      const logindata = await axios.post(`${userPort}/login_user/socialmedia`, {
+      const logindata = await axios.post(`${userPort}/login_user/socialmedia`,  {
         email,
         password,
+      },{
+        withCredentials:true
       });
 
       if (logindata.data.success) {
