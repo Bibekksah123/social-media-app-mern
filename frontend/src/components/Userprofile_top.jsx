@@ -2,8 +2,7 @@ import React from 'react';
 import { IoArrowBack } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import Avatar from "react-avatar";
-import { useSelector } from "react-redux";
-import useUserProfile from '../hooks/userProfile';
+import useUserProfile from '../components/UserProfile';
 
 function Userprofile_top() {
   // const { User } = useSelector((state) => state.userdata); #fix/configure this sate
